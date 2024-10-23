@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Data Analysis App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('static/images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Make sure only one image is visible at a time */
+        .image-box {
+            display: none;
+            max-width: 100%;
+        }
+
+        .image-box.active {
+            display: block;
+        }
+
+        /* Arrow navigation styling */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            cursor: pointer;
+            color: #333;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        .left-arrow {
+            left: 10px;
+        }
+
+        .right-arrow {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-blue p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold">PreProPlot-Data Analysis</a>
+            <ul class="flex space-x-6">
+                <li><a href="/" class="hover:text-blue-300">Home</a></li>
+                <li><a href="/dashboard" class="hover:text-blue-300">Dashboard</a></li>
+                <li><a href="#" class="hover:text-blue-300">About</a></li>
+                <li><a href="#" class="hover:text-blue-300">Help</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-10 p-6 max-w-2xl text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to the Data Analysis App</h1>
+        <p class="text-lg text-gray-600 mb-6">Upload your dataset (CSV file) and explore various data visualizations and insights.</p>
+
+        <!-- File Upload Form -->
+        <form method="POST" enctype="multipart/form-data" action="/">
+            <div class="mb-6">
+                <label for="file" class="block text-lg font-medium text-gray-700 mb-2">Select a CSV File:</label>
+                <input type="file" name="file" id="file" accept=".csv" class="block w-full text-sm text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none">
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">Upload and Analyze</button>
+        </form>
+
+        <!-- Instructions -->
+        <div class="mt-8 text-left">
+            <h2 class="text-2xl font-semibold text-gray-800">Instructions:</h2>
+            <ul class="list-disc list-inside text-gray-600 mt-4">
+                <li>Upload a CSV file containing your dataset.</li>
+                <li>Once uploaded, you'll be redirected to the dashboard to explore visualizations.</li>
+                <li>Use the dashboard to generate graphs and analyze your data.</li>
+            </ul>
+        </div>
+
+        <!-- Process Overview -->
+        <div class="mt-10 text-left">
+            <h2 class="text-2xl font-semibold text-gray-800">Data Analysis Process:</h2>
+            <p class="text-gray-600 mt-4">The data analysis process involves several steps:</p>
+            <ol class="list-decimal list-inside text-gray-600 mt-4">
+                <li><strong>Data Collection:</strong> Gather relevant data from various sources.</li>
+                <li><strong>Data Cleaning:</strong> Preprocess the data to handle missing values, duplicates, and errors.</li>
+                <li><strong>Data Visualization:</strong> Generate visual representations of the data to uncover patterns.</li>
+                <li><strong>Insights Extraction:</strong> Analyze the visualizations to derive actionable insights.</li>
+            </ol>
+        </div>
+
+        <!-- Example Graphs Section -->
+        <div class="mt-10 relative">
+            <h2 class="text-2xl font-semibold text-gray-800">Example Graphs:</h2>
+            <div class="relative mt-4 w-full max-w-xl mx-auto">
+                <div id="image1" class="image-box active">
+                    <img src="static/images/example1.png" alt="Example 1" class="mx-auto max-w-full">
+                </div>
+                <div id="image2" class="image-box">
+                    <img src="static/images/example2.png" alt="Example 2" class="mx-auto max-w-full">
+                </div>
+                <div id="image3" class="image-box">
+                    <img src="static/images/example3.png" alt="Example 3" class="mx-auto max-w-full">
+                </div>
+                <div id="image4" class="image-box">
+                    <img src="static/images/example4.png" alt="Example 4" class="mx-auto max-w-full">
+                </div>
+                <div id="image5" class="image-box">
+                    <img src="static/images/example5.png" alt="Example 5" class="mx-auto max-w-full">
+                </div>
+
+                <!-- Arrow Navigation -->
+                <div class="arrow left-arrow" id="prevBtn"><i class="fas fa-chevron-left"></i></div>
+                <div class="arrow right-arrow" id="nextBtn"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white text-center py-4 mt-10">
+        <p>&copy; 2024 Data Analysis App. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Image Navigation -->
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.image-box');
+        const totalImages = images.length;
+
+        function showImage(index) {
+            images.forEach((img, i) => {
+                img.classList.remove('active');
+                if (i === index) {
+                    img.classList.add('active');
+                }
+            });
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalImages; // Cycle through images
+            showImage(currentIndex);
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages; // Cycle backward through images
+            showImage(currentIndex);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+.image-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.image-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-image {
+    min-width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.slider-image img {
+    width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#graph-container {
+    margin-top: 20px;
+}
+
+#attributes-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#attributes-checkboxes .form-check {
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
