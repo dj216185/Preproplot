@@ -79,13 +79,6 @@ _Insert Histogram, Boxplots, or Bar Charts here._
 - **Network Graphs (Graphviz)**  
   ![Network Graph](graphs/network_graph.png)
 
-### 4. Label Encoding
-- Before Encoding:
-  ![Before Encoding](graphs/before_encoding.png)
-
-- After Encoding:
-  ![After Encoding](graphs/after_encoding.png)
-
 ---
 
 ## Contributing
