@@ -70,14 +70,6 @@ _Example output will be shown here._
 _Insert Histogram, Boxplots, or Bar Charts here._
 
 ### 3. Multi-Variable Plots
-- **Scatter Plots**  
-  ![Scatter Plot](graphs/scatter_plot.png)
-
-- **Heatmaps**  
-  ![Heatmap](graphs/heatmap.png)
-
-- **Network Graphs (Graphviz)**  
-  ![Network Graph](graphs/network_graph.png)
 
 ---
 
@@ -97,5 +89,5 @@ This project is licensed under the MIT License.
 
 For any questions or suggestions, feel free to reach out:
 
-- **Email:** your-email@example.com
-- **GitHub:** [yourusername](https://github.com/yourusername)
+- **Email:** jalukadevesh7@gmail.com
+- **GitHub:** [Devesh Jaluka](https://github.com/dj216185/)
